@@ -1,0 +1,27 @@
+web:
+    image: nginx:1.17.2
+    ports:
+        - "8080:80"
+    volumes:
+        - ./extra/web/nginx_default.conf:/etc/nginx/conf.d/default.conf
+    volumes_from:
+      - elgg:rw
+    links:
+        - elgg
+elgg:
+    image: ytjohn/elgg:3.1.0
+    volumes:
+        - ./extra/php/zz-log.conf:/usr/local/etc/php-fpm.d/zz-log.conf
+        - elggdata:/elggdata 
+    links:
+      - db
+db: 
+    image: mariadb:10.4.6
+    restart: unless-stopped
+    volumes:
+      - elggdb:/var/lib/mysql
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: elgg
+      MYSQL_USER: elgg
+      MYSQL_PASSWORD: elggpassword
