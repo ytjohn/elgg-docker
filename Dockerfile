@@ -1,7 +1,7 @@
 FROM php:7.3.7-fpm
 ARG VERSION=3.1.0
 
-COPY ./php/zz-log.conf /usr/local/etc/php-fpm.d/zz-log.conf
+COPY ./extra/php/zz-log.conf /usr/local/etc/php-fpm.d/zz-log.conf
 # COPY ./php/install-composer.sh /tmp/install-composer.sh
 RUN apt-get update && apt-get install -y \
         git \

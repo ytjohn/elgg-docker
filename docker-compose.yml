@@ -11,7 +11,6 @@ web:
 elgg:
     image: ytjohn/elgg:3.1.0
     volumes:
-        - ./extra/php/zz-log.conf:/usr/local/etc/php-fpm.d/zz-log.conf
         - elggdata:/elggdata 
     links:
       - db
